@@ -1,0 +1,50 @@
+body{
+    display: grid;
+    width: 90%;
+    height: 90%;
+    background-color: rgb(220, 231, 247);
+    margin: 5%;
+    border-radius: 6px;
+    grid-template-rows: 50px 100px;
+}
+#login-info-box{
+    margin: 0%;
+    background-color: lightslategray;
+
+}
+
+#login-info-box ul{
+    margin-left:  40px;
+    list-style-type: none;
+}
+#controls{
+    margin: 0%;
+    grid-column-start: 2;
+    grid-column-end: span col4-start;
+    grid-row-start: 1;
+    grid-row-end: span 2;
+}
+#controls-member{
+    width: 100%;
+    resize: none;
+}
+
+#list{
+    /*grid*/
+    margin-left: 10px;
+    grid-column-start: 3;
+    grid-column-end: span col4-start;
+    grid-row-start: 2;
+    grid-row-end: span 2;
+    /*style*/
+    border-collapse: collapse;
+
+}
+#list th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+#list .orders{
+    background-color: white;
+}
