@@ -4,7 +4,7 @@
  */
 package com.company.back;
 
-import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.*;
 import java.math.BigInteger;
 import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
@@ -49,16 +49,8 @@ public class Util {
         }
         return (hexString.toString().toLowerCase());
     }
-    public String getCookie(HttpRequest request, String name){
-        Cookie cookies[] = request.getCookies();  
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(name)) {
-                    return cookie.getValue();
-                }               
-            }
-                   
-        }
+    public String getcookie(HttpRequest request, String name){
+
         System.out.println("cookie error ):");
         return "err";
     }

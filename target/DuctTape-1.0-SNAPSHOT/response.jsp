@@ -43,9 +43,12 @@ response.setDateHeader ("Expires", 0);
         ArrayList<String> res = new ArrayList<String>();
         ArrayList<String> MetaRes = new ArrayList<String>();
         String query = null;
+        
         Cookie cookies[]=request.getCookies();  
 	String logintime = "<p style=\"color: red;\">time set err</p>";
 
+        String userCookie = "";
+        
      if (cookies != null) {
 	    for (Cookie cookie : cookies) {
 		   if (cookie.getName().equals("empnum") && request.getSession().getAttribute("ChangePswd").equals("2")) {
@@ -56,12 +59,22 @@ response.setDateHeader ("Expires", 0);
 			  + "<input name=\"newpass_confirm\" type=\"text\" value=\"\" placeholder=\"confirm\"><br>"
 			  + "<input type=\"submit\" value=\"change\">"
 			  + "</form>");
+		   }else if (cookie.getName().equals("empnum")) {
+                        // add cookie to response so that the Cahngestuff might use it
+                        response.addCookie(cookie.getCookie());
+                        // set the usercookie locally to string
+                        userCookie = cookie.getValue();
+                        
 		   }
                    if (cookie.getName().equals("logintime")) {
                         logintime = cookie.getValue();
 		   }
 	    }
 }
+
+
+
+        
         if(request.getSession().getAttribute("Job").equals("Sales Rep")){
          mode = 1;  
 	  

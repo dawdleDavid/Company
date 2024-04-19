@@ -5,6 +5,7 @@
 package com.company.back;
 
 
+import jakarta.servlet.http.Cookie;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class Changestuff {
     Connection connection;
 
     
-    public int AddCustomer(ArrayList<String> customer_data){
+    public int AddCustomer(string empCookie, ArrayList<String> customer_data){
                   
             String query = "SELECT * FROM employees WHERE email='"+ customer_data.get(2) +"';"; // test if this exists
             
@@ -34,11 +35,12 @@ public class Changestuff {
                 }/**/
             
             
-            
+                    
+
             ArrayList<String> sales_rep_data = new ArrayList<String>();
 
             // ovveride one woudl hope?
-            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE employeeNumber='"+ customer_data.get(2) +"';"); 
+            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE employeeNumber='"+ empCookie +"';"); 
                 
         
             if(result.isBeforeFirst()){
