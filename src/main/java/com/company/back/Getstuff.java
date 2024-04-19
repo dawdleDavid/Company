@@ -81,7 +81,7 @@ public class Getstuff {
     public Getstuff(){
         this.url = "jdbc:mysql://localhost:3306/company?zeroDateTimeBehavior=CONVERT_TO_NULL&useLegacyDatetimeCode=false&serverTimezone=UTC";
         this.mysql_username = "david";
-        this.mysql_password = "password1";
+        this.mysql_password = "password";
     }    
 }
 

@@ -61,7 +61,6 @@ response.setDateHeader ("Expires", 0);
 			  + "</form>");
 		   }else if (cookie.getName().equals("empnum")) {
                         // add cookie to response so that the Cahngestuff might use it
-                        response.addCookie(cookie.getCookie());
                         // set the usercookie locally to string
                         userCookie = cookie.getValue();
                         

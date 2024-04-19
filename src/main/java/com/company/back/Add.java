@@ -96,6 +96,7 @@ class AddCustomer extends HttpServlet{
 	     if (cookies != null) {
 		   for (Cookie cookie : cookies) {
 			  if (cookie.getName().equals("empnum")){
+                                System.out.println("we are rolling");
 				 this.get = new Getstuff();
 				 this.change = new Changestuff(this.get.GetConnection());
 					this.parameters.add(request.getParameter("customerName"));
@@ -108,12 +109,15 @@ class AddCustomer extends HttpServlet{
 					this.parameters.add(request.getParameter("state"));	
 					this.parameters.add(request.getParameter("postalCode"));
 					this.parameters.add(request.getParameter("country"));
-					this.parameters.add(request.getParameter("country"));
 					this.parameters.add(request.getParameter("creditLimit"));
 					this.parameters.add(request.getParameter(cookie.getValue()));
 					this.parameters.add(request.getParameter("creditLimit"));
 
 
+                                        
+                                        // debug print for late scrappers
+                                        System.out.println(this.parameters.toString());
+                                        
 					if(this.parameters.contains("")){
 					   System.out.println("this.parameters.contains(null)");
 						request.setAttribute("error", "All fields are mandatory");

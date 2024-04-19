@@ -20,7 +20,7 @@ public class Changestuff {
     Connection connection;
 
     
-    public int AddCustomer(string empCookie, ArrayList<String> customer_data){
+    public int AddCustomer(ArrayList<String> customer_data){
                   
             String query = "SELECT * FROM employees WHERE email='"+ customer_data.get(2) +"';"; // test if this exists
             
@@ -37,10 +37,8 @@ public class Changestuff {
             
                     
 
-            ArrayList<String> sales_rep_data = new ArrayList<String>();
-
             // ovveride one woudl hope?
-            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE employeeNumber='"+ empCookie +"';"); 
+            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE employeeNumber='"+ customer_data.get(11) +"';"); 
                 
         
             if(result.isBeforeFirst()){
