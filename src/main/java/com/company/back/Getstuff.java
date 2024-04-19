@@ -35,9 +35,9 @@ public class Getstuff {
     }
     }
 
-    public String GetFromEmployeeNumber(int employeeNumber, String column, String table, String cond){
+    public ArrayList<String> GetFromEmployeeNumber(int employeeNumber, String column, String table, String cond){
         // vet inte hur detta fungerar under huven, kan jag ha ett statement som jag återanvänder hela tiden, vet ej!
-        String retval = null; // let's just call this the error case...
+        ArrayList<String> retval = new ArrayList(); // let's just call this the error case...
 
         try{
             Connection connection = GetConnection();
@@ -46,7 +46,7 @@ public class Getstuff {
             ResultSet result = statement.executeQuery("SELECT " + column + " FROM "+ table +" WHERE "+cond+" ='" + employeeNumber + "';");
 
             while(result.next()){
-		   retval = result.getString(column);
+		   retval.add(result.getString(column));
             }
             connection.close();
         }catch(SQLException e){

@@ -101,8 +101,8 @@ class AddCustomer extends HttpServlet{
 				 this.get = new Getstuff();
 				 this.change = new Changestuff(this.get.GetConnection());
 					this.parameters.add(request.getParameter("customerName"));
-					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"lastName" , "employees","employeeNumber"));
-					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"firstName" , "employees","employeeNumber"));
+					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"lastName" , "employees","employeeNumber").get(0));
+					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"firstName" , "employees","employeeNumber").get(0));
 					this.parameters.add(request.getParameter("phone"));
 					this.parameters.add(request.getParameter("addressline1"));
 					this.parameters.add(request.getParameter("addressline2"));

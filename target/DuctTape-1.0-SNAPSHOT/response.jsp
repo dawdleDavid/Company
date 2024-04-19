@@ -89,12 +89,12 @@ response.setDateHeader ("Expires", 0);
 
             for(int i = 0; i <= (res.size()-1); i++){
                 out.print("<tr class="+"changecolor"+">");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber") +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "country", "customers", "customerNumber") +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "country", "customers", "customerNumber").get(0) +"</td>");
                 out.print("<td>"+ res.get(i) +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "postalCode", "customers", "customerNumber") +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "city", "customers",  "customerNumber") +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "creditLimit", "customers",  "customerNumber") +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "postalCode", "customers", "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "city", "customers",  "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "creditLimit", "customers",  "customerNumber").get(0) +"</td>");
                 //out.print("<td><button  onclick="+"showUpdateBox()"+">update</button></td>");
                 out.print("</tr>");	
                 MetaRes = get.GetStringListFromQuery("SELECT DISTINCT customerNumber FROM orders WHERE customerNumber='" +res.get(i) + "';", "customerNumber");	    
@@ -136,11 +136,11 @@ response.setDateHeader ("Expires", 0);
 		   out.print("<form method=\"post\" action=\"changepswd\"><input name=\" " + Integer.parseInt(res.get(i)) + "\" type=\"submit\" value=\"allow\"><br><input name=\"deny\"  type=\"submit\" value=\"deny\"><br></form>");		   
 	   }   
                 out.print("<tr class="+"changecolor"+">");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "firstName", "employees", "employeeNumber") +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "lastName", "employees", "employeeNumber") +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "firstName", "employees", "employeeNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "lastName", "employees", "employeeNumber").get(0) +"</td>");
                 out.print("<td>"+ res.get(i) +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "jobTitle", "employees", "employeeNumber") +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "extension", "employees", "employeeNumber") +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "jobTitle", "employees", "employeeNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "extension", "employees", "employeeNumber").get(0) +"</td>");
                 out.print("<td><form method="+"post"+" action="+"change"+"></form>");
                 out.print("<td><button  onclick="+"showUpdateBox()"+">update</button></td>");
                 out.print("</tr>");
