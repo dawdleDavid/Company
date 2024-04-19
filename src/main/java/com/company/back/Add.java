@@ -97,6 +97,7 @@ class AddCustomer extends HttpServlet{
 		   for (Cookie cookie : cookies) {
 			  if (cookie.getName().equals("empnum")){
                                 System.out.println("we are rolling");
+                                System.out.println("Empnum_cookie: " + cookie.getValue());
 				 this.get = new Getstuff();
 				 this.change = new Changestuff(this.get.GetConnection());
 					this.parameters.add(request.getParameter("customerName"));

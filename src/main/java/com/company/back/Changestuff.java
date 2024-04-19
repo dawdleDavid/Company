@@ -38,7 +38,6 @@ public class Changestuff {
                     
 
             // ovveride one woudl hope?
-            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE employeeNumber='"+ customer_data.get(11) +"';"); 
                 
         
             if(result.isBeforeFirst()){
@@ -55,15 +54,15 @@ public class Changestuff {
 	query = "INSERT INTO customers"
             + "(customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, "
             + "city, state, postalCode, country, customerNumber, salesRepEmployeeNumber, creditLimit) "
-            + "VALUES('"+ customer_data.get(0) +"','"+customer_data.get(1)  +"','"+ customer_data.get(2) +"','"+customer_data.get(3) +"','"+customer_data.get(4) +"','"+customer_data.get(5) +"','"+customer_data.get(6) +"','"+customer_data.get(7) +"', '" + customer_data.get(8)+"', '" + customer_data.get(9)+"', '" + customer_data.get(10)+"', '" + customer_data.get(11)+"', '" + customer_data.get(12)+");";		    
+            + "VALUES('"+ customer_data.get(0) +"','"+customer_data.get(1)  
+            + "','"+ customer_data.get(2) +"','"+customer_data.get(3) +"','"+customer_data.get(4) 
+            + "','"+customer_data.get(5) +"','"+customer_data.get(6) +"','"+customer_data.get(7) +"', '" + customer_data.get(8)+"', '" + customer_data.get(9)
+            + "', '" + customer_data.get(10)+"', '" + customer_data.get(11)+"', '" + Float.parseFloat(customer_data.get(12)) +"');";		    
             System.out.println("control: " + query);
             try{
 		Statement statement = this.connection.createStatement();
-		   ResultSet result = statement.executeQuery(query);
-		   if(result.isBeforeFirst()){ // this works on sql
-			  System.out.println("result is not null");
-			  return 1; // user already exists
-		   }	     
+                   statement = this.connection.prepareStatement(query);
+		   statement.execute(query);
 	}catch(SQLException e){
 		   System.out.println("AddCustomer(SQLException2): " + e);   
 	}

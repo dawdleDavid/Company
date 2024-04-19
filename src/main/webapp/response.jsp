@@ -204,15 +204,15 @@ response.setDateHeader ("Expires", 0);
                                    + "<input type=\"submit\" value=\"commit\"></form>");	  
             }else if(mode == 1){ // sales rep
                out.print(" <form id=\"controls-member\" method=\"post\" action=\"addCustomer\">"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"customerName\" type=\"text\" placeholder=\"Full name off customer\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"extension\" type=\"text\" placeholder=\"phone\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"addressline1\" type=\"text\" placeholder=\"addressline 1\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"addressline2\" type=\"text\" placeholder=\"addressline 2\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"city\" type=\"text\" placeholder=\"city\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"state\" type=\"text\" placeholder=\"state\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"postalCode\" type=\"text\" placeholder=\"postalCode\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"country\" type=\"text\" placeholder=\"country\" value=\"\"><br>"
-                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"creditLimit\" type=\"text\" placeholder=\"creditLimit\" value=\"\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"customerName\" type=\"text\" placeholder=\"Full name off customer\" value=\"DAvid\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"extension\" type=\"text\" placeholder=\"phone\" value=\"070 890 90 89\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"addressline1\" type=\"text\" placeholder=\"addressline 1\" value=\"Huddingevagen 1\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"addressline2\" type=\"text\" placeholder=\"addressline 2\" value=\"Huddingevagen 2\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"city\" type=\"text\" placeholder=\"city\" value=\"Stockholm\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"state\" type=\"text\" placeholder=\"state\" value=\"Stockholm\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"postalCode\" type=\"text\" placeholder=\"postalCode\" value=\"14144\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"country\" type=\"text\" placeholder=\"country\" value=\"sweden\"><br>"
+                   + "<input id=\"controls-member\" autocomplete=\"off\" name=\"creditLimit\" type=\"text\" placeholder=\"creditLimit\" value=\"90 000\"><br>"
                    + "<input type=\"submit\" value=\"commit\">"
                                        + "</form>");	  
                          }
