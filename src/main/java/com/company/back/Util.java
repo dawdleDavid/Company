@@ -4,13 +4,12 @@
  */
 package com.company.back;
 
-import jakarta.mail.Session;
-import jakarta.mail.Transport;
+import jakarta.servlet.http.Cookie;
 import java.math.BigInteger;
+import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Properties;
 
 
 
@@ -50,8 +49,23 @@ public class Util {
         }
         return (hexString.toString().toLowerCase());
     }
+    public String getCookie(HttpRequest request, String name){
+        Cookie cookies[] = request.getCookies();  
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(name)) {
+                    return cookie.getValue();
+                }               
+            }
+                   
+        }
+        System.out.println("cookie error ):");
+        return "err";
+    }
+
     
    
+    
     
     public Util(){
         

@@ -38,7 +38,7 @@ public class Changestuff {
             ArrayList<String> sales_rep_data = new ArrayList<String>();
 
             // ovveride one woudl hope?
-            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE");
+            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE employeeNumber='"+ customer_data.get(2) +"';"); 
                 
         
             if(result.isBeforeFirst()){
