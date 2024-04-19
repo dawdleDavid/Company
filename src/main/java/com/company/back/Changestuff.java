@@ -53,11 +53,11 @@ public class Changestuff {
         
 	query = "INSERT INTO customers"
             + "(customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, "
-            + "city, state, postalCode, country, customerNumber, salesRepEmployeeNumber, creditLimit) "
+            + "city, state, postalCode, country, salesRepEmployeeNumber, creditLimit) "
             + "VALUES('"+ customer_data.get(0) +"','"+customer_data.get(1)  
             + "','"+ customer_data.get(2) +"','"+customer_data.get(3) +"','"+customer_data.get(4) 
             + "','"+customer_data.get(5) +"','"+customer_data.get(6) +"','"+customer_data.get(7) +"', '" + customer_data.get(8)+"', '" + customer_data.get(9)
-            + "', '" + customer_data.get(10)+"', '" + customer_data.get(11)+"', '" + Float.parseFloat(customer_data.get(12)) +"');";		    
+            + "', '" + customer_data.get(10) +"', '" + customer_data.get(11)+"');";		    
             System.out.println("control: " + query);
             try{
 		Statement statement = this.connection.createStatement();

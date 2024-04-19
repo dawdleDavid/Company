@@ -101,8 +101,8 @@ class AddCustomer extends HttpServlet{
 				 this.get = new Getstuff();
 				 this.change = new Changestuff(this.get.GetConnection());
 					this.parameters.add(request.getParameter("customerName"));
-					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"contactLastName" , "customers","employeeNumber"));
-					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"contactFirstName" , "customers","employeeNumber"));
+					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"lastName" , "employees","employeeNumber"));
+					this.parameters.add(get.GetFromEmployeeNumber(Integer.parseInt(cookie.getValue()),"firstName" , "employees","employeeNumber"));
 					this.parameters.add(request.getParameter("phone"));
 					this.parameters.add(request.getParameter("addressline1"));
 					this.parameters.add(request.getParameter("addressline2"));
@@ -110,14 +110,13 @@ class AddCustomer extends HttpServlet{
 					this.parameters.add(request.getParameter("state"));	
 					this.parameters.add(request.getParameter("postalCode"));
 					this.parameters.add(request.getParameter("country"));
-					this.parameters.add(request.getParameter("creditLimit"));
-					this.parameters.add(request.getParameter(cookie.getValue()));
+					this.parameters.add(cookie.getValue());
 					this.parameters.add(request.getParameter("creditLimit"));
 
 
                                         
                                         // debug print for late scrappers
-                                        System.out.println(this.parameters.toString());
+                                        System.out.println("contact firstname: " + this.parameters.get(1));
                                         
 					if(this.parameters.contains("")){
 					   System.out.println("this.parameters.contains(null)");
