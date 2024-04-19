@@ -21,34 +21,29 @@ public class Changestuff {
 
     
     public int AddCustomer(ArrayList<String> customer_data){
-                  
-            String query = "SELECT * FROM employees WHERE email='"+ customer_data.get(2) +"';"; // test if this exists
+            
+        
+        
+            // if you have the same address line
+            String query = "SELECT customerName FROM customers WHERE addressLine1='"+ customer_data.get(4) +"';"; // test if this exists
             
             
             try{
                 System.out.println("control: " + query);
                 Statement statement = this.connection.createStatement();
                 ResultSet result = statement.executeQuery(query);
-                if(result.isBeforeFirst()){ // this works in sql....
-                    System.out.println("result is not null");
-                    return 1; // user already exists
-                }/**/
-            
-            
-                    
-
-            // ovveride one woudl hope?
-                
-        
-            if(result.isBeforeFirst()){
-
-                return 1; // user already exists
-            }
+                while(result.next()){
+                    if(result.getString("customerName").equals(customer_data.get(0))){
+                        return 1; // user already exists
+                    }
+            }/**/
 	}catch(SQLException e){
 	     System.out.println("AddCustomer(SQLException1): " + e);
 	    }
          // get contact last and first name       
 
+
+         
 
         
 	query = "INSERT INTO customers"

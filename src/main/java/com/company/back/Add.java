@@ -114,7 +114,7 @@ class AddCustomer extends HttpServlet{
 					this.parameters.add(request.getParameter("creditLimit"));
 
 
-                                        
+   
                                         // debug print for late scrappers
                                         System.out.println("contact firstname: " + this.parameters.get(1));
                                         
@@ -124,14 +124,20 @@ class AddCustomer extends HttpServlet{
 					     this.parameters.clear();
 					     request.getRequestDispatcher("response.jsp").forward(request, response);   
 					}
-
-
-
+                                        try{
+                                            if(Float.parseFloat(this.parameters.get(11)) > 99999.0){
+                                                request.setAttribute("error", "The credit limit is set too high!");
+                                                request.getRequestDispatcher("response.jsp").forward(request, response);   
+                                            }
+                                        }catch(Exception e){
+                                            request.setAttribute("error", "invalid number format for credit limit");
+                                            request.getRequestDispatcher("response.jsp").forward(request, response);   
+                                        }
+                                            
 
 					int res = this.change.AddCustomer(parameters);
 				   if(res == 1){
-					 request.setAttribute("error", "Customer allready exists");
-					 this.parameters.clear();
+					 request.setAttribute("error", "Customer already exists");
 					 request.getRequestDispatcher("response.jsp").forward(request, response);   
 				   }
 				   this.parameters.clear();
