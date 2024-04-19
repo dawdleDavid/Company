@@ -36,8 +36,7 @@ public class Getstuff {
     }
 
     public ArrayList<String> GetFromEmployeeNumber(int employeeNumber, String column, String table, String cond){
-        // vet inte hur detta fungerar under huven, kan jag ha ett statement som jag återanvänder hela tiden, vet ej!
-        ArrayList<String> retval = new ArrayList(); // let's just call this the error case...
+        ArrayList<String> retval = new ArrayList(); 
 
         try{
             Connection connection = GetConnection();
@@ -53,7 +52,13 @@ public class Getstuff {
             // some black magic going on with this SQL exception.... 
             System.out.println("SQLException(GetFromEmployeeNumber): " + e);
         }
-
+        if(retval.isEmpty()){
+            retval.add("<p style=\"color: red;\">no data</p>");
+        }
+        
+        System.out.println("retval: " + retval.toString());
+        
+        
         return retval;
     }
     

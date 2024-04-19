@@ -85,11 +85,11 @@ public class Login extends HttpServlet{
             System.out.println("SESSION(Login): " + session.getId());		
 	// attributes
             session.setAttribute("EmployeeNumber", this.username);
-            session.setAttribute("Firstname", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "firstName", "employees", "employeeNumber"));
-            session.setAttribute("Job", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "jobTitle", "employees", "employeeNumber"));
-            session.setAttribute("Lastname", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "lastName", "employees", "employeeNumber"));
-            session.setAttribute("Extension", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "extension", "employees", "employeeNumber"));
-            session.setAttribute("ChangePswd", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "requirePwdChange", "employees", "employeeNumber"));
+            session.setAttribute("Firstname", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "firstName", "employees", "employeeNumber").get(0));
+            session.setAttribute("Job", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "jobTitle", "employees", "employeeNumber").get(0));
+            session.setAttribute("Lastname", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "lastName", "employees", "employeeNumber").get(0));
+            session.setAttribute("Extension", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "extension", "employees", "employeeNumber").get(0));
+            session.setAttribute("ChangePswd", this.get.GetFromEmployeeNumber(Integer.parseInt(this.username), "requirePwdChange", "employees", "employeeNumber").get(0));
             // cookies
             Cookie UserCookie = new Cookie("empnum", this.username);	
             Cookie LoginTimeCookie = new Cookie("logintime", URLEncoder.encode( new java.util.Date().toString(), "UTF-8" ));
