@@ -47,7 +47,7 @@ public class Getstuff {
 
             while(result.next()){
 		   retval = result.getString(column);
-	}
+            }
             connection.close();
         }catch(SQLException e){
             // some black magic going on with this SQL exception.... 

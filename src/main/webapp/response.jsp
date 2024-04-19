@@ -100,14 +100,19 @@ response.setDateHeader ("Expires", 0);
                 MetaRes = get.GetStringListFromQuery("SELECT DISTINCT customerNumber FROM orders WHERE customerNumber='" +res.get(i) + "';", "customerNumber");	    
                     System.out.println("p_size:" + Integer.toString((MetaRes.size()-1)));
                     out.print("<tr><th>orderNumber</th><th>requiredDate</th><th>shippedDate</th><th>status</th><th>comments</th></tr>");
-		   for(int p = 0;p<= (MetaRes.size()-1);p++){
+
+                    for(int p = 0;p<= (MetaRes.size()-1);p++){
+
                           out.print("<tr class="+"orders"+">");
-			  out.print("<td >"+ get.GetFromEmployeeNumber(Integer.parseInt(MetaRes.get(p)), "orderNumber", "orders", "customerNumber") +"</td>");
+
+                          out.print("<div style=\"display: hidden;\">");
+                          out.print("<td >"+ get.GetFromEmployeeNumber(Integer.parseInt(MetaRes.get(p)), "orderNumber", "orders", "customerNumber") +"</td>");
 			  out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(MetaRes.get(p)), "requiredDate", "orders", "customerNumber") +"</td>");
 			  out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(MetaRes.get(p)), "shippedDate", "orders", "customerNumber") +"</td>");
 			  out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(MetaRes.get(p)), "status", "orders",  "customerNumber") +"</td>");
 			  out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(MetaRes.get(p)), "comments", "orders",  "customerNumber") +"</td>");		  
-			  out.print("</tr>");
+
+                          out.print("</tr>");
 		  }
 	
 	 out.print("</tr>");	
