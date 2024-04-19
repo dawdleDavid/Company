@@ -125,6 +125,7 @@ class AddCustomer extends HttpServlet{
 					     request.getRequestDispatcher("response.jsp").forward(request, response);   
 					}
                                         try{
+                                            System.out.println("parameters 11: " + this.parameters.get(11));
                                             if(Float.parseFloat(this.parameters.get(11)) > 99999.0){
                                                 request.setAttribute("error", "The credit limit is set too high!");
                                                 request.getRequestDispatcher("response.jsp").forward(request, response);   
@@ -134,11 +135,10 @@ class AddCustomer extends HttpServlet{
                                             request.getRequestDispatcher("response.jsp").forward(request, response);   
                                         }
                                             
-
-					int res = this.change.AddCustomer(parameters);
-				   if(res == 1){
-					 request.setAttribute("error", "Customer already exists");
-					 request.getRequestDispatcher("response.jsp").forward(request, response);   
+				   if(this.change.AddCustomer(parameters) == 1){
+                                        System.out.println("user exists");
+					request.setAttribute("error", "Customer already exists");
+					request.getRequestDispatcher("response.jsp").forward(request, response);   
 				   }
 				   this.parameters.clear();
 				   RequestDispatcher requestDispatcher = request.getRequestDispatcher("response.jsp");   
@@ -150,10 +150,5 @@ class AddCustomer extends HttpServlet{
      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/logout");  
      requestDispatcher.forward(request, response);
 }
-	  
-	    
-	    
-
-    }
-
+}
 }
