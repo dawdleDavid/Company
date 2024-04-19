@@ -31,7 +31,7 @@ public class Changestuff {
             if(result.isBeforeFirst()){ // this works in sql....
                 System.out.println("result is not null");
                 return 1; // user already exists
-            }
+            }/**/
 	}catch(SQLException e){
 	     System.out.println("AddCustomer(SQLException1): " + e);
 	    }
