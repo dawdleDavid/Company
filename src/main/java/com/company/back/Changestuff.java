@@ -24,18 +24,38 @@ public class Changestuff {
             String query = "SELECT * FROM employees WHERE email='"+ customer_data.get(2) +"';"; // test if this exists
             
             
-                try{
-            System.out.println("control: " + query);
-            Statement statement = this.connection.createStatement();
-            ResultSet result = statement.executeQuery(query);
-            if(result.isBeforeFirst()){ // this works in sql....
-                System.out.println("result is not null");
+            try{
+                System.out.println("control: " + query);
+                Statement statement = this.connection.createStatement();
+                ResultSet result = statement.executeQuery(query);
+                if(result.isBeforeFirst()){ // this works in sql....
+                    System.out.println("result is not null");
+                    return 1; // user already exists
+                }/**/
+            
+            
+            
+            ArrayList<String> sales_rep_data = new ArrayList<String>();
+
+            // ovveride one woudl hope?
+            result = statement.executeQuery("SELECT firstName, lastName FROM employees WHERE");
+                
+        
+            if(result.isBeforeFirst()){
+
                 return 1; // user already exists
-            }/**/
+            }
 	}catch(SQLException e){
 	     System.out.println("AddCustomer(SQLException1): " + e);
 	    }
-	query = "INSERT INTO customers (customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, city, state, postalCode, country, customerNumber, salesRepEmployeeNumber, creditLimit) VALUES('"+ customer_data.get(0) +"','"+customer_data.get(1)  +"','"+ customer_data.get(2) +"','"+customer_data.get(3) +"','"+customer_data.get(4) +"','"+customer_data.get(5) +"','"+customer_data.get(6) +"','"+customer_data.get(7) +"', '" + customer_data.get(8)+"', '" + customer_data.get(9)+"', '" + customer_data.get(10)+"', '" + customer_data.get(11)+"', '" + customer_data.get(12)+");";		    
+         // get contact last and first name       
+
+
+        
+	query = "INSERT INTO customers"
+            + "(customerName, contactLastName, contactFirstName, phone, addressLine1, addressLine2, "
+            + "city, state, postalCode, country, customerNumber, salesRepEmployeeNumber, creditLimit) "
+            + "VALUES('"+ customer_data.get(0) +"','"+customer_data.get(1)  +"','"+ customer_data.get(2) +"','"+customer_data.get(3) +"','"+customer_data.get(4) +"','"+customer_data.get(5) +"','"+customer_data.get(6) +"','"+customer_data.get(7) +"', '" + customer_data.get(8)+"', '" + customer_data.get(9)+"', '" + customer_data.get(10)+"', '" + customer_data.get(11)+"', '" + customer_data.get(12)+");";		    
             System.out.println("control: " + query);
             try{
 		Statement statement = this.connection.createStatement();
