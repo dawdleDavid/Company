@@ -24,3 +24,13 @@ function editbtn(id){
     }
   
 }
+
+function answerphone(id){
+    var phone =  document.getElementById('phone');
+    switch(id){
+        case "busy":
+            phone.pause();
+            phone.currentTime = 0;;
+            break;
+    }
+}

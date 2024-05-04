@@ -184,31 +184,6 @@ response.setDateHeader ("Expires", 0);
 
     }	
     %></td></div><%
-
-
-    
-	/*
-
-           for(int i = 0; i <= (res.size()-1); i++){
-	     
-	  if(get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "requirePwdChange", "employees", "employeeNumber").equals("1")){
-		   out.print(get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "firstName", "employees", "employeeNumber") + " " + get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "lastName", "employees", "employeeNumber") + " has requested a password change.<br>");
-		   out.print("<form method=\"post\" action=\"changepswd\"><input name=\" " + Integer.parseInt(res.get(i)) + "\" type=\"submit\" value=\"allow\"><br><input name=\"deny\"  type=\"submit\" value=\"deny\"><br></form>");		   
-	   }   
-                out.print("<tr class="+"changecolor"+">");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "firstName", "employees", "employeeNumber").get(0) +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "lastName", "employees", "employeeNumber").get(0) +"</td>");
-                out.print("<td>"+ res.get(i) +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "jobTitle", "employees", "employeeNumber").get(0) +"</td>");
-                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "extension", "employees", "employeeNumber").get(0) +"</td>");
-                out.print("<td><form method="+"post"+" action="+"change"+"></form>");
-                out.print("<script> $(\"#" + result.getString("orderNumber") + "\").click(function(){"
-                        + "$(\"#form-" + result.getString("orderNumber") + "\").show(500);"
-                        + "document.cookie = \"selord="+result.getString("orderNumber")+"\"; "
-                        + "});</script>");	
-                out.print("</tr>");
-            }  
-*/
         }
 
     %>
@@ -283,7 +258,7 @@ response.setDateHeader ("Expires", 0);
                     <button>Answer</button>
                     <button>Hang up</button>
                     <button>+5</button>
-                    <button>Busy</button>
+                    <button id="busy" onclick="answerphone(this.id)">Busy</button>
                     <button>auto</button>
                     <button>Answer</button>
 
@@ -305,23 +280,27 @@ response.setDateHeader ("Expires", 0);
                     <form id="controls-member" method="post" action="addOrder">
                         <!-- <input id="controls-member" autocomplete="off" name="customerNumber" type="text" placeholder="customerNumber" value=""><br> -->
                         
-                        <select width=300 style="width: 350px"  name="customerNumber">
+                        <select width=300 name="customerNumber">
                             <%
                             for(int i = 0; i <= options.size()-1; i++){
                                 out.print(options.get(i));
                             }
                             %>
-                        </select><br>
-                        
-                        
-                        
+                        </select><br>    
                         <label for="requiredDate">required date</label><br>
                         <input id="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="startdate" value=""><br>
                         <label for="shippedDate">shipped date</label><br> 
                         <input id="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippeddate" value=""><br>
                         <label for="orderDate">order date</label><br>
                         <input id="controls-member" autocomplete="off" name="orderDate" type="date" placeholder="orderdate" value=""><br>
-                        <input id="controls-member" autocomplete="off" name="status" type="text" placeholder="status" value=""><br>
+                        <select width=300  name="status">
+
+                            <option value="Shipped">Shipped</option>
+                            <option value="Not shipped">Not shipped</option>
+                            <option value="Shipping">Shipping</option>
+                            <option value="Awaiting payment">Awaiting payment</option>
+                            <option value="see comment">see comment</option>
+                        </select><br>    
                         <label for="html">comment</label><br>
                         <textarea id="controls-member" autocomplete="off" name="comment" rows="5" cols="33" placehoder="message"></textarea>
                         <input type="submit" value="commit">
