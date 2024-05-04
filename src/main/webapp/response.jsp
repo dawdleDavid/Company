@@ -107,7 +107,6 @@ response.setDateHeader ("Expires", 0);
                 out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "postalCode", "customers", "customerNumber").get(0) +"</td>");
                 out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "city", "customers",  "customerNumber").get(0) +"</td>");
                 out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "creditLimit", "customers",  "customerNumber").get(0) +"</td>");
-                //out.print("<td><button  onclick="+"showUpdateBox()"+">update</button></td>");
                 out.print("</tr>");	
 
                 //System.out.println("p_size:" + Integer.toString((MetaRes.size()-1)));
@@ -116,7 +115,7 @@ response.setDateHeader ("Expires", 0);
                 options.add("<option value='"+res.get(i)+"'>"+res.get(i)+"("+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0)+")"+"</option>");
 
                 %>
-                <td><h4 id="orders-for">orders for <%get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0); %></h4></td>
+                <td><h4 id="orders-for">orders for <%= get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0)  %></h4></td>
                 <tr><th>orderNumber</th><th>requiredDate</th><th>shippedDate</th><th>status</th><th>comments</th><tr>
                 <%
                 ResultSet result;
@@ -133,13 +132,9 @@ response.setDateHeader ("Expires", 0);
                     out.print("<td>" + result.getString("comments") + "</td>");
                     
                     // crimes are a comming
-                    out.print("<td> <button id="+ result.getString("orderNumber") +">edit</button></td>");	
+                    out.print("<td><button id="+ result.getString("orderNumber") +" onclick="+"editbtn(this.id)"+">edit</button></td>");	
                     
                     out.print("</tr>");
-                    out.print("<script> $(\"#" + result.getString("orderNumber") + "\").click(function(){"
-                        + "$(\"#form-" + result.getString("orderNumber") + "\").show(500);"
-                        + "document.cookie = \"selord="+result.getString("orderNumber")+"\"; "
-                        + "});</script>");	
 
                     out.print("<tr><th></th></tr><td><section class="+"info-dump"+" id=\"form-" + result.getString("orderNumber") + "\" style=\"display: none;\">");
                    %>
@@ -304,7 +299,7 @@ response.setDateHeader ("Expires", 0);
                         <input id="controls-member" autocomplete="off" name="postalCode" type="text" placeholder="postalCode" value=""><br>
                         <input id="controls-member" autocomplete="off" name="country" type="text" placeholder="country" value=""><br>
                         <input id="controls-member" autocomplete="off" name="creditLimit" type="text" placeholder="creditLimit" value=""><br>
-                        <input type="submit" value="commit">"
+                        <input type="submit" value="commit">
                     </form>
                     <h2>Add order</h2>                  
                     <form id="controls-member" method="post" action="addOrder">

@@ -10,9 +10,17 @@ var intervalId = window.setInterval(function(){
         document.getElementById('phone').play();
     }
 }, 5000);
-// funktion for att testa om man clickat element
- /*
-$(window).on('scroll', function() { 
-      var scrollPosition = $(this).scrollTop(); 
-      $('#scroll').css('top', scrollPosition); 
-});*/ 
+// "edit" knappen
+
+function editbtn(id){
+    // ta förra värdet från kaka
+    let cookies = document.cookie; 
+    $("#form-"+id.toString()).show(500);
+    document.cookie = "selord="+id;
+    // om det förra värdet är lika med det nuvarande, (inte bra implementering)
+    if(cookies.includes("selord="+id)){
+        $("#form-"+id.toString()).hide(500);
+        document.cookie = "selord="+null;
+    }
+  
+}
