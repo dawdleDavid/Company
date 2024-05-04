@@ -42,7 +42,7 @@ public class Getstuff {
             Connection connection = GetConnection();
     
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT " + column + " FROM "+ table +" WHERE "+cond+" ='" + employeeNumber + "';");
+            ResultSet result = statement.executeQuery("SELECT " + column + " FROM "+ table +" WHERE "+cond+" =" + employeeNumber + ";");
 
             while(result.next()){
 		   retval.add(result.getString(column));
@@ -60,6 +60,17 @@ public class Getstuff {
         
         
         return retval;
+    }
+     public ResultSet GetResultSetFromQuery(String query){
+        try{
+            Connection connection = GetConnection();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);  
+            return result;
+        }catch(SQLException e){
+            System.out.println("SQLException(GetResultSetFromQuery): "  + e);
+        }
+        return null;   
     }
     
     public ArrayList<String> GetStringListFromQuery(String query, String thing){

@@ -17,12 +17,28 @@ body{
     margin-left:  40px;
     list-style-type: none;
 }
+#login-info-box img{
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+}
+#login-info-box li{
+    color: white;
+    font-weight: 900;
+    font-style: italic;
+}
 #controls{
     margin: 0%;
     grid-column-start: 2;
     grid-column-end: span col4-start;
     grid-row-start: 1;
     grid-row-end: span 2;
+    /* stick nonsense */
+    position: sticky;
+    top: 0;
+    left: 0;
+    align-self: start;
+    
 }
 #controls-member{
     width: 100%;
@@ -47,4 +63,32 @@ body{
 }
 #list .orders{
     background-color: white;
+}
+#phone-section{
+    background-color: lightblue;
+}
+#phone-section img{
+    width: 20%;
+}
+#phone-section button{
+    margin-left: 10%;
+    width: 80%;
+
+}
+#orders-for{
+    background-color: rgb(200, 200, 255);
+    width: 100%;
+}
+.changecolor{
+    background-color: white;
+}
+.customer{
+    background-color: lightblue;
+}
+.info-dump{
+    width: 100%;
+}
+.info-dump form{
+    width: 50%;
+    margin-left: 25%;
 }

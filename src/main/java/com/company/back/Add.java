@@ -12,7 +12,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+
+
 
 /**
  *
@@ -77,6 +86,90 @@ public class Add extends HttpServlet{
     }
 
 }
+@WebServlet("/addOrder")
+class AddOrder extends HttpServlet{
+    
+    Changestuff change;
+    Getstuff get;
+    ArrayList<String> parameters = new ArrayList();
+    String sql;
+    Connection connection;
+    
+    
+    
+    
+    SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+              
+            this.get = new Getstuff();
+            this.change = new Changestuff(this.get.GetConnection());
+        
+        
+            System.out.println("SESSION_VALUE: " + request.getSession().getAttribute("EmployeeNumber").toString());
+            this.parameters.add(request.getParameter("customerNumber"));
+            this.parameters.add(request.getParameter("requiredDate"));
+            this.parameters.add(request.getParameter("shippedDate"));
+            this.parameters.add(request.getParameter("orderDate"));
+            this.parameters.add(request.getParameter("comment"));
+            this.parameters.add(request.getParameter("status"));
+            
+            
+            // input validation
+            if(this.parameters.contains("")){
+		request.setAttribute("error", "All fields are mandatory");
+		this.parameters.clear();
+		request.getRequestDispatcher("response.jsp").forward(request, response);   
+	    }
+
+            try{
+                if(dateformat.parse(parameters.get(2)).after(dateformat.parse(parameters.get(1)))){
+                    request.setAttribute("error", "The shipped date may not be later than the required date");
+                    // add code to report that the order was late
+                    
+		    parameters.clear();  
+                }
+                }catch(ParseException e){
+                    System.out.println("DateFormat parse exception: " + e);
+                            }
+            
+            
+            try{
+               this.connection = this.get.GetConnection();
+                           
+                // check that the customer is registered to the sales rep
+               sql = "SELECT customerNumber FROM customers WHERE salesRepEmployeeNumber='"+request.getSession().getAttribute("EmployeeNumber").toString()+"';";
+               ResultSet result = get.GetResultSetFromQuery(sql);
+               
+               while(result.next()){
+                   if(result.getString("customerNumber").equals(parameters.get(0))){        
+                        sql = "INSERT INTO orders (customerNumber, requiredDate, shippedDate, orderDate, comments, status) VALUES('"+parameters.get(0)
+                                +"','"+parameters.get(1)+"','"+parameters.get(2)+"','"+parameters.get(3)+ "','"+parameters.get(4)+"','"+parameters.get(5)+"');";
+                        System.out.println(sql);
+                        Statement statement = this.connection.prepareStatement(sql);
+                        statement.execute(sql);
+                        this.connection.close();
+                        request.getRequestDispatcher("response.jsp").forward(request, response);   
+                        
+                   }
+               }
+               /*
+                vi gör helt enkelt ingenting om den kunden inte finns, borde vara ett error i framtiden
+               */
+               this.connection.close();
+            }catch(SQLException e){
+                System.out.println("class UpdateOrder(SQLException 1) " + e);
+            }catch(Exception e){
+                System.out.println("class UpdateOrder(Exception 1) " + e);    
+            }
+            
+            // wooo
+            request.setAttribute("error", "you do not own that customer");
+        
+            request.getRequestDispatcher("response.jsp").forward(request, response);   
+    }
+}
+
 @WebServlet("/addCustomer")
 class AddCustomer extends HttpServlet{
         
@@ -96,7 +189,6 @@ class AddCustomer extends HttpServlet{
 	     if (cookies != null) {
 		   for (Cookie cookie : cookies) {
 			  if (cookie.getName().equals("empnum")){
-                                System.out.println("we are rolling");
                                 System.out.println("Empnum_cookie: " + cookie.getValue());
 				 this.get = new Getstuff();
 				 this.change = new Changestuff(this.get.GetConnection());
@@ -141,6 +233,8 @@ class AddCustomer extends HttpServlet{
 					request.getRequestDispatcher("response.jsp").forward(request, response);   
 				   }
 				   this.parameters.clear();
+                                   
+                                   // may be scuffed
 				   RequestDispatcher requestDispatcher = request.getRequestDispatcher("response.jsp");   
 				   requestDispatcher.forward(request, response);
 			}
@@ -151,4 +245,75 @@ class AddCustomer extends HttpServlet{
      requestDispatcher.forward(request, response);
 }
 }
+}
+@WebServlet("/updateOrder")
+class UpdateOrder extends HttpServlet{
+        
+    Changestuff change;
+    Getstuff get;
+    Connection connection;
+    String sql;
+    ArrayList<String> parameters = new ArrayList();
+    
+
+    SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+    
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            this.parameters.clear();
+	    Cookie cookies[]=request.getCookies();  
+
+	     if (cookies != null) {
+		   for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("selord")){ // we need this to find out were we need to edit
+                            this.get = new Getstuff();
+                            // get the form data
+                            parameters.add(request.getParameter("requiredDate"));
+                            parameters.add(request.getParameter("shippedDate"));
+                            parameters.add(request.getParameter("status"));
+                            parameters.add(request.getParameter("comment"));
+                            
+                            System.out.println(parameters);
+                            if(parameters.contains("")){
+				    System.out.println("this.parameters.contains(null)");
+                                    request.setAttribute("error", "All fields are mandatory");
+				    parameters.clear();
+				    request.getRequestDispatcher("response.jsp").forward(request, response);   
+                            }
+                            
+                            if(parameters.get(3).length() > 500){
+                                    request.setAttribute("error", "Comments can be no longer than 500 characters");
+				    parameters.clear();
+				    request.getRequestDispatcher("response.jsp").forward(request, response);   
+                            }
+                            try{
+                                if(dateformat.parse(parameters.get(1)).after(dateformat.parse(parameters.get(0)))){
+                                    request.setAttribute("error", "Shipped date was too late, this has been reported to your higher up");
+                                    // add code to report that the order was late
+                                    
+				    parameters.clear();  
+                                }
+                            }catch(ParseException e){
+                                System.out.println("DateFormat parse exception: " + e);
+                            }
+                            try{
+                                this.connection = this.get.GetConnection();
+                                sql = "UPDATE orders " +
+                                        "SET requiredDate='"+parameters.get(0) + "', shippedDate='"+parameters.get(1) + "', comments='"+this.parameters.get(3) + "' " +
+                                        ", status='"+parameters.get(2)+"' WHERE orderNumber='"+cookie.getValue()+"'";
+                                System.out.println(sql);
+                                Statement statement = this.connection.prepareStatement(sql);
+                                statement.execute(sql);
+                                this.connection.close();
+                            }catch(Exception e){
+                                System.out.println("class UpdateOrder(exception 1) " + e);
+                            }
+                           
+                            RequestDispatcher requestDispatcher = request.getRequestDispatcher("response.jsp");   
+			    requestDispatcher.forward(request, response);
+                        }
+                   }
+             }
+    }
 }

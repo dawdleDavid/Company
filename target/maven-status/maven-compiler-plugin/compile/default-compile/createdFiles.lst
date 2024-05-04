@@ -2,6 +2,7 @@ com/mycompany/ducttape/JakartaRestConfiguration.class
 com/company/back/changeps.class
 com/company/back/UpdatePswd.class
 com/company/back/ChangeHashes.class
+com/company/back/AddOrder.class
 com/company/back/Changestuff.class
 com/company/back/Admin.class
 com/company/back/Login.class
@@ -14,4 +15,5 @@ com/company/back/Logout.class
 com/company/back/Util.class
 com/company/back/Changepswd.class
 com/company/back/Add.class
+com/company/back/UpdateOrder.class
 com/mycompany/ducttape/resources/JakartaEE10Resource.class

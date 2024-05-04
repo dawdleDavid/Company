@@ -1,27 +1,18 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
- */
-
-/*---------------------------------------------------------------------------------------------------*/
-function showBox(){
-    document.getElementsByClassName("add_Employee_box").style.display = "block";
+function rand(max) {
+  return Math.floor(Math.random() * max);
 }
-function hideBox(){
-    document.getElementsByClassName("add_Employee_box").style.display = "none";
-}
-/*---------------------------------------------------------------------------------------------------*/
-function showUpdateBox(){
-    document.getElementsByClassName("update_box").style.display = "block";
-}
-function hideUpdateBox(){
-    document.getElementsByClassName("update_box").style.display = "none";
-}
-/*---------------------------------------------------------------------------------------------------*/
-function ShowChangePswdBox(){
-     document.getElementById("change_password").style.display = "block";
-}
-function HideChangePswdBox(){
-     document.getElementById("change_password").style.display = "none";
-}
-/*---------------------------------------------------------------------------------------------------*/
+// generera telefonsamtal
+var intervalId = window.setInterval(function(){
+    if(rand(10) === 2){
+        console.log("phone call");
+        
+        // play phonecall sound
+        document.getElementById('phone').play();
+    }
+}, 5000);
+// funktion for att testa om man clickat element
+ /*
+$(window).on('scroll', function() { 
+      var scrollPosition = $(this).scrollTop(); 
+      $('#scroll').css('top', scrollPosition); 
+});*/ 

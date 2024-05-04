@@ -5,7 +5,7 @@
 package com.company.back;
 
 
-import jakarta.servlet.http.Cookie;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,11 +56,11 @@ public class Changestuff {
             System.out.println("control: " + query);
             try{
 		Statement statement = this.connection.createStatement();
-                   statement = this.connection.prepareStatement(query);
-		   statement.execute(query);
-	}catch(SQLException e){
-		   System.out.println("AddCustomer(SQLException2): " + e);   
-	}
+                statement = this.connection.prepareStatement(query);
+		statement.execute(query);
+            }catch(SQLException e){
+                       System.out.println("AddCustomer(SQLException2): " + e);   
+            }
 
 	 return 0;
     }
@@ -174,3 +174,6 @@ public int genericQuery(String query){
 	  
 	  
 }
+// update functions
+    
+
