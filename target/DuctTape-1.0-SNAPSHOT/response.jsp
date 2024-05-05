@@ -121,7 +121,7 @@ response.setDateHeader ("Expires", 0);
                 ResultSet result;
                 result = get.GetResultSetFromQuery("SELECT * from orders WHERE customerNumber="+res.get(i)+";");
               
-
+                
                 while(result.next()){
                     out.print("<tr class="+"changecolor"+">");
                     // out.print("cuz:" +  customernumber);
@@ -138,10 +138,8 @@ response.setDateHeader ("Expires", 0);
 
 
                    %>
-                        
-               <!-- <!--<tr><th></th></tr><td> -->
-               <tr><th><td>
-                    <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">
+                <tr><td>
+                <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">               
                     <!--
                             Formulär för att redigera order
                         -->
@@ -156,23 +154,26 @@ response.setDateHeader ("Expires", 0);
                         <!--
                             Tabell med orderinformation från orderdetails
                         -->
-                        
-                        <tr><th>productCode</th><th>quantity</th><th>price for each</th><th>line number</th>s<tr>
+                       <!--<table>-->
+                       <tr><th>productCode</th><th>quantity</th><th>price for each</th><th>line number</th><tr>
+        
                         <%
-                            
                             ResultSet orders;
                             orders = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+result.getString("orderNumber")+";");
-                            while(orders.next()){
-                             
                         %>
+                        <td>        
+                       <%
+                            while(orders.next()){
+                        %>
+
                                 <tr class="orderdetails">
                                 <td> <%= orders.getString("productCode")%> </td>
                                 <td> <%= orders.getString("quantityOrdered")%> </td>
                                 <td> <%= orders.getString("priceEach")%> </td>
                                 <td> <%= orders.getString("orderLineNumber")%> </td>
                                 </tr>
-                    
-                    </section>
+                         <!--</table> -->
+ 
                     <%
         }
     }
@@ -181,6 +182,8 @@ response.setDateHeader ("Expires", 0);
 
 
 %>
+                </td></td></tr>
+                </section>
 <div id="scroll">
           <tr><th>id</th><th>First Name</th><th>last name</th><th>Extension</th><th>Email</th><th>Job Title</th></tr>
   <%
@@ -204,35 +207,20 @@ response.setDateHeader ("Expires", 0);
 
                     out.print("</tr>");
 
-    }	
-    %></td></div><%
-        }
+        }	
+    }
 
     %>
-    </table>
-
-
-
-	 
-        <!--<button onclick="hideBox()">exit</button> -->
-   
-    <!--<div id="change_password"> 
-        <button onclick="hideBox()">exit</button>
-    </div>-->
     <!-- Audio tag -->
     <audio controls id="phone" style="display: none;">
      <source src="cls/office_phone-ring_medium-loudaif-14604.mp3" type="audio/mp3">
      Your browser does not support the audio tag.
    </audio> 
     <section id="controls">
-
-
-        
-    
-        
+    </table>   
         
      
-<section id="control-panel"><br>
+<section id="controls"><br>
             <form id="controls-member" method="post" action="logout">
                 <input id="controls-member"  type="submit" value="logout">
             </form>
