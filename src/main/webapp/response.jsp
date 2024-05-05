@@ -139,51 +139,66 @@ response.setDateHeader ("Expires", 0);
 
                    %>
                 <tr><td>
-                <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">               
-                    <!--
-                            Formulär för att redigera order
-                        -->
-                        <form id="controls-member" method="post" action="updateOrder">
-                            <input id="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="requredDate" value=<%=result.getString("requiredDate")%> ><br>
-                            <input id="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippedDate"value=<%=result.getString("shippedDate")%>><br>
-                            <input id="controls-member" autocomplete="off" name="status" type="text" placeholder="status" value=<%=result.getString("status")%>><br>
-                            <textarea id="controls-member" 
-                                      name="comment" rows="5" cols="33" placehoder="message"><%=result.getString("comments")%></textarea>
-                            <input type="submit" value="commit">
-                        </form>
-                        <!--
-                            Tabell med orderinformation från orderdetails
-                        -->
-                       <!--<table>-->
-                       <tr><th>productCode</th><th>quantity</th><th>price for each</th><th>line number</th><tr>
-        
-                        <%
-                            ResultSet orders;
-                            orders = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+result.getString("orderNumber")+";");
-                        %>
-                        <td>        
-                       <%
-                            while(orders.next()){
-                        %>
+                <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">  
+                
+                    <form id="controls-member" method="post" action="updateOrder">
+                        <input id="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="requredDate" value=<%=result.getString("requiredDate")%>/><br>
+                        <input id="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippedDate"value=<%=result.getString("shippedDate")%>/><br>
+                        <input id="controls-member" autocomplete="off" name="status" type="text" placeholder="status" value=<%=result.getString("status")%>/><br>
+                        <textarea id="controls-member" name="comment" rows="5" cols="33" placehoder="message"><%=result.getString("comments")%></textarea>
+                        <input type="submit" value="commit">
+                    </form>
+                </section></td></tr>
+                 
+                
+                
+                <tr><th>productCode</th><th>quantity</th><th>price for each</th><th>line number</th></tr>
+                <tr class="orderdetails"><td>
+                <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">  
+               
+                
+                
 
-                                <tr class="orderdetails">
+                
+                
+                
+                
+                </section></td></tr> 
+        
+
+                
+                <%
+                    ResultSet orders;
+                    orders = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+result.getString("orderNumber")+";");
+                    while(orders.next()){
+                %>
+
+                
+                
+                
+                            <tr class="orderdetails">
                                 <td> <%= orders.getString("productCode")%> </td>
                                 <td> <%= orders.getString("quantityOrdered")%> </td>
                                 <td> <%= orders.getString("priceEach")%> </td>
                                 <td> <%= orders.getString("orderLineNumber")%> </td>
-                                </tr>
-                         <!--</table> -->
+                            </tr>
  
-                    <%
-        }
-    }
+
+        <%}%>
+    <%}%>
+  
+
+                            
+<%
 }
+
+
+
     }else{
 
 
 %>
-                </td></td></tr>
-                </section>
+
 <div id="scroll">
           <tr><th>id</th><th>First Name</th><th>last name</th><th>Extension</th><th>Email</th><th>Job Title</th></tr>
   <%
