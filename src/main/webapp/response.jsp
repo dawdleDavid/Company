@@ -88,7 +88,7 @@ response.setDateHeader ("Expires", 0);
         if(request.getSession().getAttribute("Job").equals("Sales Rep")){
             mode = 1;  
 	  
-  
+    
 			
             query = "SELECT customerNumber FROM customers WHERE salesRepEmployeeNumber='" + request.getSession().getAttribute("EmployeeNumber") + "';";	
             res = get.GetStringListFromQuery(query, "customerNumber");    
@@ -136,9 +136,13 @@ response.setDateHeader ("Expires", 0);
                     
                     out.print("</tr>");
 
-                    out.print("<tr><th></th></tr><td><section class="+"info-dump"+" id=\"form-" + result.getString("orderNumber") + "\" style=\"display: none;\">");
+
                    %>
-                        <!--
+                        
+               <!-- <!--<tr><th></th></tr><td> -->
+               <tr><th><td>
+                    <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">
+                    <!--
                             Formulär för att redigera order
                         -->
                         <form id="controls-member" method="post" action="updateOrder">
@@ -153,32 +157,27 @@ response.setDateHeader ("Expires", 0);
                             Tabell med orderinformation från orderdetails
                         -->
                         
-                        <tr><th>productCode</th><th>quantity</th><th>price for each</th><tr>
+                        <tr><th>productCode</th><th>quantity</th><th>price for each</th><th>line number</th>s<tr>
                         <%
                             
-                            ResultSet result;
-                            result = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+ result.getString("orderNumber")+";");
-                            while(result.next()){
+                            ResultSet orders;
+                            orders = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+result.getString("orderNumber")+";");
+                            while(orders.next()){
                              
                         %>
-                                <tr class="+"changecolor"+">");
-                                <td> <%= result.getString("productCode"); %> </td>
-                                <td> <%= result.getString("quantityOrdered"); %> </td>
-                                <td> <%= result.getString("shippedDate"); %> </td>
-                                <td> <%= result.getString("status"); %> </td>
-                                <td> <%= result.getString("comments"); %> </td>
-                   %>
-                            
-               
+                                <tr class="orderdetails">
+                                <td> <%= orders.getString("productCode")%> </td>
+                                <td> <%= orders.getString("quantityOrdered")%> </td>
+                                <td> <%= orders.getString("priceEach")%> </td>
+                                <td> <%= orders.getString("orderLineNumber")%> </td>
                                 </tr>
                     
+                    </section>
                     <%
-                        }
-           
-    
-    }     
-    out.print("</tr>");
-     }else{
+        }
+    }
+}
+    }else{
 
 
 %>
