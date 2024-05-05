@@ -86,7 +86,7 @@ response.setDateHeader ("Expires", 0);
 
         
         if(request.getSession().getAttribute("Job").equals("Sales Rep")){
-         mode = 1;  
+            mode = 1;  
 	  
   
 			
@@ -125,7 +125,7 @@ response.setDateHeader ("Expires", 0);
                 while(result.next()){
                     out.print("<tr class="+"changecolor"+">");
                     // out.print("cuz:" +  customernumber);
-                    out.print("<td>" + result.getString("orderNumber") + "</td>");	
+                    out.print("<td>" + result.getString("orderNumber") + "</td>");	//  kontrollera html för table
                     out.print("<td>" + result.getString("requiredDate") + "</td>");	
                     out.print("<td>" + result.getString("shippedDate") + "</td>");	
                     out.print("<td>" + result.getString("status") + "</td>");	
@@ -138,6 +138,9 @@ response.setDateHeader ("Expires", 0);
 
                     out.print("<tr><th></th></tr><td><section class="+"info-dump"+" id=\"form-" + result.getString("orderNumber") + "\" style=\"display: none;\">");
                    %>
+                        <!--
+                            Formulär för att redigera order
+                        -->
                         <form id="controls-member" method="post" action="updateOrder">
                             <input id="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="requredDate" value=<%=result.getString("requiredDate")%> ><br>
                             <input id="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippedDate"value=<%=result.getString("shippedDate")%>><br>
@@ -146,11 +149,31 @@ response.setDateHeader ("Expires", 0);
                                       name="comment" rows="5" cols="33" placehoder="message"><%=result.getString("comments")%></textarea>
                             <input type="submit" value="commit">
                         </form>
+                        <!--
+                            Tabell med orderinformation från orderdetails
+                        -->
+                        
+                        <tr><th>productCode</th><th>quantity</th><th>price for each</th><tr>
+                        <%
+                            
+                            ResultSet result;
+                            result = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+ result.getString("orderNumber")+";");
+                            while(result.next()){
+                             
+                        %>
+                                <tr class="+"changecolor"+">");
+                                <td> <%= result.getString("productCode"); %> </td>
+                                <td> <%= result.getString("quantityOrdered"); %> </td>
+                                <td> <%= result.getString("shippedDate"); %> </td>
+                                <td> <%= result.getString("status"); %> </td>
+                                <td> <%= result.getString("comments"); %> </td>
+                   %>
+                            
+               
+                                </tr>
                     
                     <%
-                    
-                    out.print("</section></td>");  
-                }
+                        }
            
     
     }     
@@ -189,11 +212,7 @@ response.setDateHeader ("Expires", 0);
     %>
     </table>
 
-     <%-- 
-     Vi får helt enkelt ladda in filer allt eftersom.... Det kan låta lite trassligt, vilket det kommer att vara,
-     men det är den bästa lösningen jag kan komma på just nu. Servern listar ut vilken nivå på privilegiestegen du är
-     och agerar enligt det...
-    --%>
+
 
 	 
         <!--<button onclick="hideBox()">exit</button> -->
@@ -206,29 +225,14 @@ response.setDateHeader ("Expires", 0);
      <source src="cls/office_phone-ring_medium-loudaif-14604.mp3" type="audio/mp3">
      Your browser does not support the audio tag.
    </audio> 
-
-
-
-    
- 
     <section id="controls">
-        <!--
-        <section id="login-info-box">
-            <img src="https://i2.pickpik.com/photos/1013/641/84/confident-successful-girl-woman-preview.jpg">
-            
-            
-            <h4>Welcome,  ${Firstname}!</h4>
-            <h4>Logged in at: <%= logintime%></h4>    
-            <ul>
-                <li>${Job}</li>
-                <li>${Extension}</li>
-            </ul>
-        </section>
-        -->
+
+
+        
     
         
         
-        
+     
 <section id="control-panel"><br>
             <form id="controls-member" method="post" action="logout">
                 <input id="controls-member"  type="submit" value="logout">
@@ -311,7 +315,7 @@ response.setDateHeader ("Expires", 0);
   </section> 
 	  
     </section>
-
+        </section>
     
     
     </body>
