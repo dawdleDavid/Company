@@ -30,16 +30,25 @@ response.setDateHeader ("Expires", 0);
     <body>
        
     <%
+<<<<<<< HEAD
         
         
         
         
 
+=======
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
        // https://www.tutorialspoint.com/jsp/jsp_architecture.htm
        Getstuff get = new Getstuff(); 
        Changestuff change = new Changestuff(get.GetConnection()); 
        Util util = new Util(); 
+<<<<<<< HEAD
        Connection connection = get.GetConnection(); 
+=======
+       /*Cookies*/
+       //UserCookie.setMaxAge(60*60);
+       //response.addCookie(UserCookie);
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
     %>
    
     <table id="list">
@@ -99,6 +108,7 @@ response.setDateHeader ("Expires", 0);
              //        out.print("----" + get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber")  + "---");
 	    //}
 
+<<<<<<< HEAD
             
 
             for(int i = 0; i <= (res.size()-1); i++){ 
@@ -113,10 +123,25 @@ response.setDateHeader ("Expires", 0);
                     out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "city", "customers",  "customerNumber").get(0) +"</td>");
                     out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "creditLimit", "customers",  "customerNumber").get(0) +"</td>");
                     out.print("</tr>");	
+=======
+            for(int i = 0; i <= (res.size()-1); i++){
+            
+                out.print("<tr><th>Customer name</th><th>country</th><th>Customer number</th><th>Postal code</th><th>City</th><th>Credit limit</th></tr>");
+
+                out.print("<tr class="+"customer"+">");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "country", "customers", "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ res.get(i) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "postalCode", "customers", "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "city", "customers",  "customerNumber").get(0) +"</td>");
+                out.print("<td>"+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "creditLimit", "customers",  "customerNumber").get(0) +"</td>");
+                out.print("</tr>");	
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 
                 //System.out.println("p_size:" + Integer.toString((MetaRes.size()-1)));
                 
                    // add options
+<<<<<<< HEAD
                 options.add("<option value="+res.get(i)+">"+res.get(i)+"("+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0)+")"+"</option>");
 
                 %>
@@ -136,18 +161,39 @@ response.setDateHeader ("Expires", 0);
                     // out.print("cuz:" +  customernumber);
                     String orderNumber = result.getString("orderNumber");
                     out.print("<td>" + orderNumber + "</td>");	//  kontrollera html för table
+=======
+                options.add("<option value='"+res.get(i)+"'>"+res.get(i)+"("+ get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0)+")"+"</option>");
+
+                %>
+                <td><h4 id="orders-for">orders for <%= get.GetFromEmployeeNumber(Integer.parseInt(res.get(i)), "customerName", "customers", "customerNumber").get(0)  %></h4></td>
+                <tr><th>orderNumber</th><th>requiredDate</th><th>shippedDate</th><th>status</th><th>comments</th><tr>
+                <%
+                ResultSet result;
+                result = get.GetResultSetFromQuery("SELECT * from orders WHERE customerNumber="+res.get(i)+";");
+              
+                
+                while(result.next()){
+                    out.print("<tr class="+"changecolor"+">");
+                    // out.print("cuz:" +  customernumber);
+                    out.print("<td>" + result.getString("orderNumber") + "</td>");	//  kontrollera html för table
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                     out.print("<td>" + result.getString("requiredDate") + "</td>");	
                     out.print("<td>" + result.getString("shippedDate") + "</td>");	
                     out.print("<td>" + result.getString("status") + "</td>");	
                     out.print("<td>" + result.getString("comments") + "</td>");
                     
                     // crimes are a comming
+<<<<<<< HEAD
                     out.print("<td><button id="+ orderNumber +" onclick="+"editbtn(this.id)"+">edit</button></td>");	
+=======
+                    out.print("<td><button id="+ result.getString("orderNumber") +" onclick="+"editbtn(this.id)"+">edit</button></td>");	
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                     
                     out.print("</tr>");
 
 
                    %>
+<<<<<<< HEAD
                 <tr><td colspan="6">
                 <section class="info-dump" id="form-<%= result.getString("orderNumber") %>">  <!-- TODO: this id has to go --> 
 
@@ -200,6 +246,59 @@ response.setDateHeader ("Expires", 0);
                     </form>
                 </section></td></tr>
     <%}%>
+=======
+                <tr><td>
+                <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">  
+                
+                    <form id="controls-member" method="post" action="updateOrder">
+                        <input id="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="requredDate" value=<%=result.getString("requiredDate")%>/><br>
+                        <input id="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippedDate"value=<%=result.getString("shippedDate")%>/><br>
+                        <input id="controls-member" autocomplete="off" name="status" type="text" placeholder="status" value=<%=result.getString("status")%>/><br>
+                        <textarea id="controls-member" name="comment" rows="5" cols="33" placehoder="message"><%=result.getString("comments")%></textarea>
+                        <input type="submit" value="commit">
+                    </form>
+                </section></td></tr>
+                 
+                
+                
+                <tr><th>productCode</th><th>quantity</th><th>price for each</th><th>line number</th></tr>
+                <tr class="orderdetails"><td>
+                <section class="info-dump" id="form-<%= result.getString("orderNumber") %>" style="display: none;">  
+               
+                
+                
+
+                
+                
+                
+                
+                </section></td></tr> 
+        
+
+                
+                <%
+                    ResultSet orders;
+                    orders = get.GetResultSetFromQuery("SELECT * from orderdetails WHERE orderNumber="+result.getString("orderNumber")+";");
+                    while(orders.next()){
+                %>
+
+                
+                
+                
+                            <tr class="orderdetails">
+                                <td> <%= orders.getString("productCode")%> </td>
+                                <td> <%= orders.getString("quantityOrdered")%> </td>
+                                <td> <%= orders.getString("priceEach")%> </td>
+                                <td> <%= orders.getString("orderLineNumber")%> </td>
+                            </tr>
+ 
+
+        <%}%>
+    <%}%>
+  
+
+                            
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 <%
 }
 
@@ -213,23 +312,41 @@ response.setDateHeader ("Expires", 0);
 <div id="scroll">
           <tr><th>id</th><th>First Name</th><th>last name</th><th>Extension</th><th>Email</th><th>Job Title</th></tr>
   <%
+<<<<<<< HEAD
         query = "SELECT * FROM employees WHERE reportsTo='"+ request.getSession().getAttribute("EmployeeNumber") +"';";
         //res = get.GetStringListFromQuery(query, "employeeNumber");
+=======
+            query = "SELECT * FROM employees WHERE reportsTo='"+ request.getSession().getAttribute("EmployeeNumber") +"';";
+            //res = get.GetStringListFromQuery(query, "employeeNumber");
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
             
 	if(res == null){
 	    System.out.println("die");
 	}
         // samma resultset som tidigare
+<<<<<<< HEAD
         ResultSet result = get.GetResultSetFromQuery(query, connection);
         while(result.next()){
                     out.print("<tr class="+"changecolor"+">");
+=======
+        ResultSet result = get.GetResultSetFromQuery(query);
+        while(result.next()){
+                    out.print("<tr class="+"changecolor"+">");
+                    // out.print("cuz:" +  customernumber);
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                     out.print("<td>" + result.getString("employeeNumber") + "</td>");	
                     out.print("<td>" + result.getString("firstName") + "</td>");	
                     out.print("<td>" + result.getString("lastName") + "</td>");	
                     out.print("<td>" + result.getString("extension") + "</td>");	
                     out.print("<td>" + result.getString("email") + "</td>");
                     out.print("<td>" + result.getString("jobTitle") + "</td>");
+<<<<<<< HEAD
                     out.print("</tr>");
+=======
+
+                    out.print("</tr>");
+
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
         }	
     }
 
@@ -239,12 +356,22 @@ response.setDateHeader ("Expires", 0);
      <source src="cls/office_phone-ring_medium-loudaif-14604.mp3" type="audio/mp3">
      Your browser does not support the audio tag.
    </audio> 
+<<<<<<< HEAD
     </table>   
         
      
 <section class="controls"><br>
             <form class="controls-member" method="post" action="logout">
                 <input class="controls-member"  type="submit" value="logout">
+=======
+    <section id="controls">
+    </table>   
+        
+     
+<section id="controls"><br>
+            <form id="controls-member" method="post" action="logout">
+                <input id="controls-member"  type="submit" value="logout">
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
             </form>
             <a href="status.jsp">employee status</a>
     
@@ -253,6 +380,7 @@ response.setDateHeader ("Expires", 0);
                     if(mode == 0)	
                     { 
                 %>
+<<<<<<< HEAD
                     <h2>Add Employee</h2>
                     <form class="controls-member" method="post" action="add">
                         <input autocomplete="off" name="firstname" type="text" placeholder="firstname" value=""><br>
@@ -264,6 +392,17 @@ response.setDateHeader ("Expires", 0);
                         <input autocomplete="off" name="password" type="password" placeholder="password" value=""><br>
                         <input type="submit" value="commit">
                     </form>
+=======
+                    <h2>Add Employee</h2><form id="controls-member" method="post" action="add">
+                    <input id="controls-member" autocomplete="off" name="firstname" type="text" placeholder="firstname" value=""><br>
+                    <input id="controls-member" autocomplete="off" name="officeCode" type="text" placeholder="officecode" value=""><br>
+                    <input id="controls-member" autocomplete="off" name="lastname" type="text" placeholder="lastname" value=""><br>
+                    <input id="controls-member" autocomplete="off" name="email" type="text" placeholder="email" value=""><br>
+                    <input id="controls-member" autocomplete="off" name="extension" type="text" placeholder="extension" value=""><br>
+                    <input id="controls-member" autocomplete="off" name="jobtitle" type="text" placeholder="jobtitle" value=""><br>
+                    <input id="controls-member" autocomplete="off" name="password" type="password" placeholder="password" value=""><br>
+                    <input type="submit" value="commit"></form>
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                 <% }else if(mode == 1){ 
                 %>
 
@@ -279,6 +418,7 @@ response.setDateHeader ("Expires", 0);
 
 
                     </section>
+<<<<<<< HEAD
                     <h2>Add Customer</h2>
                     <form class="controls-member" method="post" action="addCustomer">
                         <input autocomplete="off" name="customerName" type="text" placeholder="Full name off customer" value=""><br>
@@ -294,6 +434,22 @@ response.setDateHeader ("Expires", 0);
                     </form>
                     <h2>Add order</h2>                  
                     <form class="controls-member" method="post" action="addOrder">
+=======
+                    <form id="controls-member" method="post" action="addCustomer">
+                        <input id="controls-member" autocomplete="off" name="customerName" type="text" placeholder="Full name off customer" value=""><br>
+                        <input id="controls-member" autocomplete="off" name=phone" type="text" placeholder="phone" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="addressline1" type="text" placeholder="addressline 1" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="addressline2" type="text" placeholder="addressline 2" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="city" type="text" placeholder="city" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="state" type="text" placeholder="state" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="postalCode" type="text" placeholder="postalCode" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="country" type="text" placeholder="country" value=""><br>
+                        <input id="controls-member" autocomplete="off" name="creditLimit" type="text" placeholder="creditLimit" value=""><br>
+                        <input type="submit" value="commit">
+                    </form>
+                    <h2>Add order</h2>                  
+                    <form id="controls-member" method="post" action="addOrder">
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                         <!-- <input id="controls-member" autocomplete="off" name="customerNumber" type="text" placeholder="customerNumber" value=""><br> -->
                         
                         <select width=300 name="customerNumber">
@@ -304,11 +460,19 @@ response.setDateHeader ("Expires", 0);
                             %>
                         </select><br>    
                         <label for="requiredDate">required date</label><br>
+<<<<<<< HEAD
                         <input class="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="startdate" value=""><br>
                         <label for="shippedDate">shipped date</label><br> 
                         <input class="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippeddate" value=""><br>
                         <label for="orderDate">order date</label><br>
                         <input class="controls-member" autocomplete="off" name="orderDate" type="date" placeholder="orderdate" value=""><br>
+=======
+                        <input id="controls-member" autocomplete="off" name="requiredDate" type="date" placeholder="startdate" value=""><br>
+                        <label for="shippedDate">shipped date</label><br> 
+                        <input id="controls-member" autocomplete="off" name="shippedDate" type="date" placeholder="shippeddate" value=""><br>
+                        <label for="orderDate">order date</label><br>
+                        <input id="controls-member" autocomplete="off" name="orderDate" type="date" placeholder="orderdate" value=""><br>
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                         <select width=300  name="status">
 
                             <option value="Shipped">Shipped</option>
@@ -318,6 +482,7 @@ response.setDateHeader ("Expires", 0);
                             <option value="see comment">see comment</option>
                         </select><br>    
                         <label for="html">comment</label><br>
+<<<<<<< HEAD
                         <textarea class="controls-member" autocomplete="off" name="comment" rows="5" cols="33" placehoder="message"></textarea>
                         <input type="submit" value="commit">
                     </form>
@@ -330,6 +495,18 @@ response.setDateHeader ("Expires", 0);
         </section> 	  
     </section>
 </section>
+=======
+                        <textarea id="controls-member" autocomplete="off" name="comment" rows="5" cols="33" placehoder="message"></textarea>
+                        <input type="submit" value="commit">
+                    </form>
+                <%}%>             
+                <span style="color: lightcoral;"name="error">${error}</span> 
+            
+  </section> 
+	  
+    </section>
+        </section>
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
     
     
     </body>

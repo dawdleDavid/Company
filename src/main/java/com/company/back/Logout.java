@@ -6,7 +6,10 @@ package com.company.back;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+<<<<<<< HEAD
 import jakarta.servlet.http.Cookie;
+=======
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +27,7 @@ public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       
     try  {
+<<<<<<< HEAD
         // set error attribut
         request.getSession().removeAttribute("error");
         request.getSession().removeAttribute("EmployeeNumber"); 
@@ -50,6 +54,24 @@ public class Logout extends HttpServlet {
         request.getSession().invalidate();
         request.getRequestDispatcher("index.jsp").forward(request, response);
          
+=======
+// set error attribut
+         request.getSession().removeAttribute("error");
+         request.getSession().removeAttribute("EmployeeNumber"); 
+         request.getSession().removeAttribute("Firstname"); 
+         request.getSession().removeAttribute("Job"); 
+         request.getSession().removeAttribute("Lastname");        
+         request.getSession().removeAttribute("Extension");       
+
+	   
+       request.getSession().removeAttribute(LEGACY_DO_HEAD);
+        HttpSession session = request.getSession();
+        System.out.println("SESSION(Logout): " + session.getId());
+        
+         request.getSession().invalidate();
+        
+         request.getRequestDispatcher("index.jsp").forward(request, response);
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
     }catch(Exception e){
 	    System.out.println("logout exception: " + e);
      }    

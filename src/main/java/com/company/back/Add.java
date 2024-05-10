@@ -105,7 +105,11 @@ class AddOrder extends HttpServlet{
             this.get = new Getstuff();
             this.change = new Changestuff(this.get.GetConnection());
         
+<<<<<<< HEAD
             // request paramneters from form
+=======
+        
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
             System.out.println("SESSION_VALUE: " + request.getSession().getAttribute("EmployeeNumber").toString());
             this.parameters.add(request.getParameter("customerNumber"));
             this.parameters.add(request.getParameter("requiredDate"));
@@ -131,15 +135,26 @@ class AddOrder extends HttpServlet{
                 }
                 }catch(ParseException e){
                     System.out.println("DateFormat parse exception: " + e);
+<<<<<<< HEAD
                 }
             
             // test
             try{//
+=======
+                            }
+            
+            
+            try{
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                this.connection = this.get.GetConnection();
                            
                 // check that the customer is registered to the sales rep
                sql = "SELECT customerNumber FROM customers WHERE salesRepEmployeeNumber='"+request.getSession().getAttribute("EmployeeNumber").toString()+"';";
+<<<<<<< HEAD
                ResultSet result = get.GetResultSetFromQuery(sql, connection);
+=======
+               ResultSet result = get.GetResultSetFromQuery(sql);
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                
                while(result.next()){
                    if(result.getString("customerNumber").equals(parameters.get(0))){        
@@ -204,6 +219,12 @@ class AddCustomer extends HttpServlet{
 					this.parameters.add(request.getParameter("country"));
 					this.parameters.add(cookie.getValue());
 					this.parameters.add(request.getParameter("creditLimit"));
+<<<<<<< HEAD
+=======
+
+
+   
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                                         // debug print for late scrappers
                                         System.out.println("contact firstname: " + this.parameters.get(1));
                                         
@@ -273,6 +294,7 @@ class UpdateOrder extends HttpServlet{
                             
                             System.out.println(parameters);
                             if(parameters.contains("")){
+<<<<<<< HEAD
 				System.out.println("this.parameters.contains(null)");
                                 request.setAttribute("error", "All fields are mandatory");
 				parameters.clear();
@@ -283,6 +305,18 @@ class UpdateOrder extends HttpServlet{
                                 request.setAttribute("error", "Comments can be no longer than 500 characters");
 				parameters.clear();
 				request.getRequestDispatcher("response.jsp").forward(request, response);   
+=======
+				    System.out.println("this.parameters.contains(null)");
+                                    request.setAttribute("error", "All fields are mandatory");
+				    parameters.clear();
+				    request.getRequestDispatcher("response.jsp").forward(request, response);   
+                            }
+                            
+                            if(parameters.get(3).length() > 500){
+                                    request.setAttribute("error", "Comments can be no longer than 500 characters");
+				    parameters.clear();
+				    request.getRequestDispatcher("response.jsp").forward(request, response);   
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                             }
                             try{
                                 if(dateformat.parse(parameters.get(1)).after(dateformat.parse(parameters.get(0)))){
@@ -303,7 +337,11 @@ class UpdateOrder extends HttpServlet{
                                 Statement statement = this.connection.prepareStatement(sql);
                                 statement.execute(sql);
                                 this.connection.close();
+<<<<<<< HEAD
                             }catch(SQLException e){
+=======
+                            }catch(Exception e){
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
                                 System.out.println("class UpdateOrder(exception 1) " + e);
                             }
                            
@@ -313,6 +351,7 @@ class UpdateOrder extends HttpServlet{
                    }
              }
     }
+<<<<<<< HEAD
 }
 @WebServlet("/updateOrderDetails")
 class updateOrderDetails extends HttpServlet{
@@ -432,4 +471,6 @@ class postToOrder extends HttpServlet{
         request.setAttribute("error", "cookie not set error");
         request.getRequestDispatcher("response.jsp").forward(request, response);     
     }
+=======
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 }

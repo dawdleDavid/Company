@@ -55,8 +55,13 @@ public class Changestuff {
             + "', '" + customer_data.get(10) +"', '" + customer_data.get(11)+"');";		    
             System.out.println("control: " + query);
             try{
+<<<<<<< HEAD
                 // 		Statement statement = this.connection.createStatement(); // not needed, idk
                 Statement statement = this.connection.prepareStatement(query);
+=======
+		Statement statement = this.connection.createStatement();
+                statement = this.connection.prepareStatement(query);
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 		statement.execute(query);
             }catch(SQLException e){
                        System.out.println("AddCustomer(SQLException2): " + e);   

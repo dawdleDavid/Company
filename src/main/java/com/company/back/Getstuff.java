@@ -61,9 +61,16 @@ public class Getstuff {
         
         return retval;
     }
+<<<<<<< HEAD
     public ResultSet GetResultSetFromQuery(String query, Connection connection){
         try{
             Statement statement = connection.createStatement();  
+=======
+     public ResultSet GetResultSetFromQuery(String query){
+        try{
+            Connection connection = GetConnection();
+            Statement statement = connection.createStatement();
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
             ResultSet result = statement.executeQuery(query);  
             return result;
         }catch(SQLException e){

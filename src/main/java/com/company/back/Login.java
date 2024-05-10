@@ -93,8 +93,11 @@ public class Login extends HttpServlet{
             // cookies
             Cookie UserCookie = new Cookie("empnum", this.username);	
             Cookie LoginTimeCookie = new Cookie("logintime", URLEncoder.encode( new java.util.Date().toString(), "UTF-8" ));
+<<<<<<< HEAD
             
             
+=======
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
             response.addCookie(UserCookie);
 	    response.addCookie(LoginTimeCookie);
 

@@ -27,7 +27,11 @@ body{
     font-weight: 900;
     font-style: italic;
 }
+<<<<<<< HEAD
 .controls{
+=======
+#controls{
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
     margin: 0%;
     grid-column-start: 2;
     grid-column-end: span col4-start;
@@ -40,6 +44,7 @@ body{
     align-self: start;
     
 }
+<<<<<<< HEAD
 .controls-member{
     width: 100%;
     resize: none;
@@ -55,12 +60,26 @@ body{
 #list{
     /*grid*/
     margin-left: 6%;
+=======
+#controls-member{
+    width: 100%;
+    resize: none;
+}
+
+#list{
+    /*grid*/
+    margin-left: 10px;
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
     grid-column-start: 3;
     grid-column-end: span col4-start;
     grid-row-start: 2;
     grid-row-end: span 2;
     /*style*/
     border-collapse: collapse;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 }
 #list th, td {
   padding: 8px;
@@ -79,6 +98,10 @@ body{
 #phone-section button{
     margin-left: 10%;
     width: 80%;
+<<<<<<< HEAD
+=======
+
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 }
 #orders-for{
     background-color: rgb(200, 200, 255);
@@ -91,13 +114,18 @@ body{
     background-color: lightblue;
 }
 .info-dump{
+<<<<<<< HEAD
     grid-area: auto;
     display: none;
+=======
+    width: 100%;
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 }
 .info-dump form{
     width: 50%;
     margin-left: 25%;
 }
+<<<<<<< HEAD
 .orderdetails{
     border-collapse: collapse;
     background-color: lightyellow;
@@ -123,4 +151,8 @@ body{
 }
 .hidden-td tr:nth-of-type(odd){
     background-color:#ccc;
+=======
+#orderdetails{
+    background-color: white;
+>>>>>>> b2120d04b4420e9a9811bf79dbaa42708ec6569c
 }
