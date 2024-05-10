@@ -105,7 +105,7 @@ class AddOrder extends HttpServlet{
             this.get = new Getstuff();
             this.change = new Changestuff(this.get.GetConnection());
         
-        
+            // request paramneters from form
             System.out.println("SESSION_VALUE: " + request.getSession().getAttribute("EmployeeNumber").toString());
             this.parameters.add(request.getParameter("customerNumber"));
             this.parameters.add(request.getParameter("requiredDate"));
@@ -131,7 +131,7 @@ class AddOrder extends HttpServlet{
                 }
                 }catch(ParseException e){
                     System.out.println("DateFormat parse exception: " + e);
-                            }
+                }
             
             
             try{
