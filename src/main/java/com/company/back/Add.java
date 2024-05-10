@@ -134,7 +134,7 @@ class AddOrder extends HttpServlet{
                 }
             
             // test
-            try{
+            try{//
                this.connection = this.get.GetConnection();
                            
                 // check that the customer is registered to the sales rep
